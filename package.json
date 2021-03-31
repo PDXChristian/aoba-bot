@@ -1,0 +1,29 @@
+{
+  "name": "Aoba-chan",
+  "version": "1.0.0",
+  "description": "All-In-One Discord Bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "PDXChristian",
+  "license": "ISC",
+  "dependencies": {
+    "booru": "^2.0.2",
+    "bufferutil": "^4.0.1",
+    "discord.js": "^11",
+    "dotenv": "^8.0.0",
+    "erlpack": "discordapp/erlpack",
+    "node-opus": "^0.3.1",
+    "reddit-simple": "^0.1.1",
+    "simple-youtube-api": "^5.1.1",
+    "sodium": "^3.0.2",
+    "youtube-node": "^1.3.3",
+    "ytdl-core": "^4.4.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
+}
