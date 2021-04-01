@@ -19,6 +19,7 @@ module.exports = (client, message) => {
   if (!message.guild) return
 
   const serverQueue = queue.get(message.guild.id)
+
   if (message.content.toLowerCase() === '!ping') {
     message.reply('Pong!')
   }
@@ -28,7 +29,7 @@ module.exports = (client, message) => {
   }
 
   if (message.content.toLowerCase() === '!help') {
-    return help(message)
+    help(message)
   }
 
   if (message.content.toLowerCase().startsWith('!kick')) {
@@ -68,7 +69,7 @@ module.exports = (client, message) => {
   if (message.content.toLowerCase() === '!resume') {
     resume(message, serverQueue)
     return
-  }
+  } 
 
   if(message.content.toLowerCase() === '!queue') {
     return songQueue(message, serverQueue)
@@ -76,5 +77,5 @@ module.exports = (client, message) => {
 
   if(message.content.toLowerCase() === '!hydro') {
     return hydro(message)
-  }
+  } 
 }
