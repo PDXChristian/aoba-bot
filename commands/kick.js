@@ -9,7 +9,7 @@ module.exports = message => {
     const member = message.guild.member(user)
     if (member) {
       member.kick('Kicked').then(() => {
-        message.reply(`Successfullly kicked ${user.tag}`)
+        message.reply(`Successfully kicked ${user.tag}`)
       }).catch(err => {
         message.reply(`I was unable to kick ${user.tag}`)
         console.error(err)
