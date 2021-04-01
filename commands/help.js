@@ -10,10 +10,10 @@ module.exports = message => {
     const command = require(`./${file}`)
     str += `${command.help.name} - ${command.help.description} \n`
   }
-  const embed = new Discord.RichEmbed()
-  .setTitle('Commands')
-  .setColor(0x0079FF)
-  .setDescription(str)
+  const embed = new Discord.MessageEmbed()
+    .setTitle('Commands')
+    .setColor(0x0079FF)
+    .setDescription(str)
   message.member.send(embed)
 
 }
