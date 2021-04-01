@@ -6,6 +6,7 @@ module.exports = async (client, event) => {
   if (!events.hasOwnProperty(event.t)) return
   const {d: data} = event
   const user = client.users.get(data.user_id)
+
   const channel = client.channels.get(data.channel_id) || await user.createDM()
 
 

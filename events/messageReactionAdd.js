@@ -1,8 +1,7 @@
 module.exports = (client, reaction, user) => {
-
-  if (user.bot) return
+  if(user.bot) return
   const member = reaction.message.guild.member(user.id)
-  if (reaction.message.id === '580952537843105792') {
+  if (reaction.message.id === '827059595985682453') {
     if (reaction.emoji.name === '✅') {
       member.addRole('580708131898916881')
     } else if (reaction.emoji.name === '❌') {
@@ -13,7 +12,7 @@ module.exports = (client, reaction, user) => {
         console.error(err)
       })
     }
+	reaction.emoji.reaction.remove(user.id)
   }
-  reaction.emoji.reaction.remove(user.id)
 
 }
