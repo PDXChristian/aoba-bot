@@ -2,6 +2,7 @@ const Discord = require('discord.js')
 require('dotenv').config()
 const YouTube = require('youtube-node')
 var youTube = new YouTube()
+
 youTube.setKey(process.env.YT_API_KEY)
 youTube.addParam('type', 'video')
 
@@ -10,19 +11,21 @@ module.exports = async function execute(message, queue, serverQueue, ytdl) {
   const args = message.content.slice('!'.length).split(/ +/)
   const commands = args.shift().toLowerCase();
   const query = args.join(' ')
-  const voiceChannel = message.member.voiceChannel
+  const voiceChannel = message.member.voice.channel
+
   serverQueue = await queue.get(message.guild.id)
+
   var root = 'https://www.youtube.com/watch?v='
   var video = ''
-  console.log(serverQueue)
+
   if(!voiceChannel) return message.channel.send('You need to be in a voice channel to play music!')
+
   const permissions = voiceChannel.permissionsFor(message.client.user)
   if(!permissions.has('CONNECT') || !permissions.has('SPEAK')) {
     return message.channel.send('I need permission to join and speak in your voice channel!')
   }
 
   if(serverQueue !== undefined && args[0] === undefined) {
-    console.log('hit')
     if(serverQueue.connection.dispatcher.paused) {
       message.channel.send('Music has been resumed')
       serverQueue.connection.dispatcher.resume()
@@ -46,8 +49,8 @@ module.exports = async function execute(message, queue, serverQueue, ytdl) {
       const video = root + result.items[0].id.videoId
       const songInfo = await ytdl.getInfo(video)
       const song = {
-        title: songInfo.title,
-        url: songInfo.video_url,
+        title: songInfo.videoDetails.title,
+        url: songInfo.videoDetails.video_url,
         image: result.items[0].snippet.thumbnails.high.url
       }
 
@@ -69,7 +72,7 @@ module.exports = async function execute(message, queue, serverQueue, ytdl) {
             var connection = await voiceChannel.join().then(connection => {
             songQueue.connection = connection;
 
-            const embed = new Discord.RichEmbed()
+            const embed = new Discord.MessageEmbed()
             .setTitle('<:yt_icon_rgb:582082533332615168> Now Playing')
             .setColor(0xFF0000)
             .setThumbnail(song.image)
@@ -87,7 +90,7 @@ module.exports = async function execute(message, queue, serverQueue, ytdl) {
         serverQueue.songs.push(song)
         console.log(serverQueue.songs)
 
-        const embed = new Discord.RichEmbed()
+        const embed = new Discord.MessageEmbed()
         .setTitle('<:yt_icon_rgb:582082533332615168> Added to Queue')
         .setColor(0xFF0000)
         .setThumbnail(song.image)
@@ -113,11 +116,11 @@ function play (guild, song, queue, ytdl) {
 
   ytSong = ytdl(song.url, {
     filter: 'audioonly',
-    highWaterMark: 1<<25
+    highWaterMark: 512
   })
 
-  const dispatcher = serverQueue.connection.playStream(ytSong, streamOptions)
-  .on('end', end => {
+  const dispatcher = serverQueue.connection.play(ytSong, streamOptions)
+  .on('finish', end => {
     console.log(end)
     console.log('Music Stopped')
     serverQueue.songs.shift()
