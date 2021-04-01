@@ -4,7 +4,7 @@ module.exports = async function flush(message) {
     return
   }
   message.delete()
-  const fetched = await message.channel.fetchMessages({limit: 100})
+  const fetched = await message.channel.messages.fetch({limit: 100})
   message.channel.bulkDelete(fetched, true)
   .then(messages => message.channel.send(`Successfully deleted ${messages.size} messages`))
   .catch(error =>
