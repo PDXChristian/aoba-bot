@@ -14,7 +14,7 @@ module.exports = function r34(message) {
       for (let post of posts) {
         const [...tags] = post.tags
         const tag = tags.join(', ')
-        const embed = new Discord.RichEmbed()
+        const embed = new Discord.MessageEmbed()
         .setTitle('Rule 34')
         .setColor(0x0079FF)
         .setDescription(tag)
