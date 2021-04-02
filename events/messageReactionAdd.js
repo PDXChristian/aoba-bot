@@ -1,0 +1,23 @@
+module.exports = async (client, reaction, user) => {
+
+  if(user.bot) return
+
+  const member = reaction.message.guild.member(user.id)
+
+  if (reaction.message.id === '827059595985682453') {
+    if (reaction.emoji.name === '✅') {
+
+      member.roles.add('580708131898916881')
+
+    } else if (reaction.emoji.name === '❌') {
+      member.kick('Kicked for not accepting terms.').then(() => {
+        console.log(`Kicked ${user.tag} for not accepting the terms.`)
+      }).catch(err =>{
+        console.log(`Unable to kick ${user.tag}`)
+        console.error(err)
+      })
+    }
+	reaction.users.remove(user.id)
+  }
+
+}
