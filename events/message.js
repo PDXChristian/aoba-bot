@@ -24,7 +24,7 @@ module.exports = (client, message) => {
     message.reply('Pong!')
   }
 
-  if (message.channel.name === 'rules') {
+  if ((message.channel.name === 'rules' || message.channel.name === 'welcome') && !message.member.user.bot) {
     message.delete()
   }
 
