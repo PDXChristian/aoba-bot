@@ -24,6 +24,10 @@ module.exports = (client, message) => {
     message.reply('Pong!')
   }
 
+  if (message.content.toLowerCase() === '!source') {
+    message.reply('https://github.com/PDXChristian/aoba-bot');
+  }
+
   if ((message.channel.name === 'rules' || message.channel.name === 'welcome') && !message.member.user.bot) {
     message.delete()
   }

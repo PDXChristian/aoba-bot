@@ -1,4 +1,4 @@
-module.exports = async (client, reaction, user) => {
+module.exports = async (client, message, reaction, user) => {
 
   if(user.bot) return
 
@@ -6,9 +6,7 @@ module.exports = async (client, reaction, user) => {
 
   if (reaction.message.id === '827059595985682453') {
     if (reaction.emoji.name === '✅') {
-
       member.roles.add('580708131898916881')
-
     } else if (reaction.emoji.name === '❌') {
       member.kick('Kicked for not accepting terms.').then(() => {
         console.log(`Kicked ${user.tag} for not accepting the terms.`)
