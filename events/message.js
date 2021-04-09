@@ -25,7 +25,7 @@ module.exports = (client, message) => {
   }
 
   if (message.content.toLowerCase() === '!source') {
-    message.reply('https://github.com/PDXChristian/aoba-bot');
+    message.channel.send('https://github.com/PDXChristian/aoba-bot');
   }
 
   if ((message.channel.name === 'rules' || message.channel.name === 'welcome') && !message.member.user.bot) {
